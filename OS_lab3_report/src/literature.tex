@@ -1,0 +1,756 @@
+\section{Исходная программа}
+
+\begin{center}
+\lstinputlisting[language=C,caption=*shared\_data.h*,captionpos=b]{inc/include/shared_data.h}
+\end{center}
+
+\begin{center}
+\lstinputlisting[language=C,caption=*library.h*,captionpos=b]{inc/include/library.h}
+\end{center}
+
+\begin{center}
+\lstinputlisting[language=C,caption=*library.c*,captionpos=b]{inc/src/library.c}
+\end{center}
+
+\begin{center}
+\lstinputlisting[language=C,caption=*parent.c*,captionpos=b]{inc/src/parent.c}
+\end{center}
+
+\begin{center}
+\lstinputlisting[language=C,caption=*child.c*,captionpos=b]{inc/src/child.c}
+\end{center}
+
+\section{Системные вызовы}
+
+\begin{verbatim}
+execve("./parent.exe", ["./parent.exe"], 0x7ffee5114460 /* 26 vars */) = 0
+mmap(NULL, 584, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f73044000
+arch_prctl(ARCH_SET_FS, 0x783f73044180) = 0
+set_tid_address(0x4a24f8)               = 437
+gettid()                                = 437
+gettid()                                = 437
+gettid()                                = 437
+gettid()                                = 437
+brk(NULL)                               = 0x189fc000
+brk(0x189fe000)                         = 0x189fe000
+mmap(0x189fc000, 4096, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x189fc000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f73043000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f73042000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f73041000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f73040000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f7303f000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f7303e000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f7303d000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f7303c000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f7303a000
+sched_getaffinity(0, 128, [0 1 2 3 4 5 6 7]) = 8
+getpid()                                = 437
+getpid()                                = 437
+uname({sysname="Linux", nodename="DESKTOP-PDV0EPV", ...}) = 0
+getcwd("/mnt/d/MAI-year2/os/os_lab3/build", 4096) = 34
+readlink("parent.exe", 0x7ffddcec7610, 4096) = -1 EINVAL (Invalid argument)
+getcwd("/mnt/d/MAI-year2/os/os_lab3/build", 4097) = 34
+open("/proc/self/mountinfo", O_RDONLY|O_LARGEFILE) = 3
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f73039000
+read(3, "165 170 0:29 / /usr/lib/modules/"..., 1024) = 1024
+read(3, "suid,relatime shared:38 - devtmp"..., 1024) = 1024
+read(3, ",lowerdir=/systemvhd,upperdir=/s"..., 1024) = 1024
+read(3, ",nosuid,nodev,noexec,relatime sh"..., 1024) = 545
+read(3, "", 1024)                       = 0
+close(3)                                = 0
+munmap(0x783f73039000, 4096)            = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f73038000
+mmap(NULL, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f73034000
+getcwd("/mnt/d/MAI-year2/os/os_lab3/build", 4096) = 34
+munmap(0x783f73034000, 16384)           = 0
+getcwd("/mnt/d/MAI-year2/os/os_lab3/build", 4096) = 34
+open("/proc/self/mountinfo", O_RDONLY|O_LARGEFILE) = 3
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f73037000
+read(3, "165 170 0:29 / /usr/lib/modules/"..., 1024) = 1024
+read(3, "suid,relatime shared:38 - devtmp"..., 1024) = 1024
+read(3, ",lowerdir=/systemvhd,upperdir=/s"..., 1024) = 1024
+read(3, ",nosuid,nodev,noexec,relatime sh"..., 1024) = 545
+read(3, "", 1024)                       = 0
+close(3)                                = 0
+munmap(0x783f73037000, 4096)            = 0
+ioctl(0, TCGETS, {c_iflag=ICRNL|IXON, c_oflag=NL0|CR0|TAB0|BS0|VT0|FF0|OPOST|ONLCR, c_cflag=B38400|CS8|CREAD, c_lflag=ISIG|ICANON|ECHO|ECHOE|ECHOK|IEXTEN|ECHOCTL|ECHOKE, ...}) = 0
+ioctl(1, TCGETS, {c_iflag=ICRNL|IXON, c_oflag=NL0|CR0|TAB0|BS0|VT0|FF0|OPOST|ONLCR, c_cflag=B38400|CS8|CREAD, c_lflag=ISIG|ICANON|ECHO|ECHOE|ECHOK|IEXTEN|ECHOCTL|ECHOKE, ...}) = 0
+ioctl(2, TCGETS, {c_iflag=ICRNL|IXON, c_oflag=NL0|CR0|TAB0|BS0|VT0|FF0|OPOST|ONLCR, c_cflag=B38400|CS8|CREAD, c_lflag=ISIG|ICANON|ECHO|ECHOE|ECHOK|IEXTEN|ECHOCTL|ECHOKE, ...}) = 0
+ioctl(0, TIOCGPGRP, [434])              = 0
+getpgid(0)                              = 434
+fstat(0, {st_mode=S_IFCHR|0620, st_rdev=makedev(0x88, 0), ...}) = 0
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(0x88, 0), ...}) = 0
+fstat(2, {st_mode=S_IFCHR|0620, st_rdev=makedev(0x88, 0), ...}) = 0
+ioctl(0, TIOCGWINSZ, {ws_row=30, ws_col=120, ws_xpixel=0, ws_ypixel=0}) = 0
+ioctl(0, TCSETS, {c_iflag=, c_oflag=NL0|CR0|TAB0|BS0|VT0|FF0|ONLCR, c_cflag=B38400|CS8|CREAD, c_lflag=ECHOE|ECHOK|ECHOCTL|ECHOKE, ...}) = 0
+dup(0)                                  = 3
+munmap(0x783f73038000, 8192)            = 0
+socket(AF_VSOCK, SOCK_STREAM|SOCK_CLOEXEC, 0) = 4
+bind(4, {sa_family=AF_VSOCK, svm_cid=VMADDR_CID_ANY, svm_port=VMADDR_PORT_ANY, svm_flags=0}, 16) = 0
+getsockname(4, {sa_family=AF_VSOCK, svm_cid=VMADDR_CID_ANY, svm_port=0xffbaac7, svm_flags=0}, [16]) = 0
+listen(4, 4)                            = 0
+access("/run/WSL/290_interop", F_OK)    = 0
+socket(AF_UNIX, SOCK_STREAM|SOCK_CLOEXEC, 0) = 5
+connect(5, {sa_family=AF_UNIX, sun_path="/run/WSL/290_interop"}, 110) = 0
+mmap(NULL, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f73036000
+open("/proc/cmdline", O_RDONLY|O_LARGEFILE) = 6
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f73035000
+readv(6, [{iov_base="initrd=\\initrd.img WSL_ROOT_INIT"..., iov_len=4095}, {iov_base="", iov_len=1024}], 2) = 145
+readv(6, [{iov_base="", iov_len=3950}, {iov_base="", iov_len=1024}], 2) = 0
+lseek(6, 0, SEEK_CUR)                   = 145
+close(6)                                = 0
+munmap(0x783f73035000, 4096)            = 0
+munmap(0x783f73036000, 16384)           = 0
+write(5, "\10\0\0\0\235\0\0\0\1\0\0\0\307\252\373\17\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 157) = 157
+poll([{fd=4, events=POLLIN}], 1, 10000) = 1 ([{fd=4, revents=POLLIN}])
+accept4(4, {sa_family=AF_VSOCK, svm_cid=VMADDR_CID_HOST, svm_port=0xc373d0cf, svm_flags=0}, [16], SOCK_CLOEXEC) = 6
+poll([{fd=4, events=POLLIN}], 1, 10000) = 1 ([{fd=4, revents=POLLIN}])
+accept4(4, {sa_family=AF_VSOCK, svm_cid=VMADDR_CID_HOST, svm_port=0xc373d0d0, svm_flags=0}, [16], SOCK_CLOEXEC) = 7
+poll([{fd=4, events=POLLIN}], 1, 10000) = 1 ([{fd=4, revents=POLLIN}])
+accept4(4, {sa_family=AF_VSOCK, svm_cid=VMADDR_CID_HOST, svm_port=0xc373d0d1, svm_flags=0}, [16], SOCK_CLOEXEC) = 8
+poll([{fd=4, events=POLLIN}], 1, 10000) = 1 ([{fd=4, revents=POLLIN}])
+accept4(4, {sa_family=AF_VSOCK, svm_cid=VMADDR_CID_HOST, svm_port=0xc373d0d2, svm_flags=0}, [16], SOCK_CLOEXEC) = 9
+close(4)                                = 0
+rt_sigprocmask(SIG_BLOCK, [INT WINCH], NULL, 8) = 0
+signalfd4(-1, [INT WINCH], 8, 0)        = 4
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=9, revents=POLLIN}])
+recvfrom(9, "\v\0\0\0 \0\0\0\0\0\0\0", 12, MSG_WAITALL, NULL, NULL) = 12
+recvfrom(9, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 20, 0, NULL, NULL) = 20
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+mmap(NULL, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x783f73036000
+read(7, "\33[6n", 4096)                 = 4
+write(1, "\33[6n", 4)                   = 4
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[30;1R", 4096)              = 7
+write(6, "\33[30;1R", 7)                = 7
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\33[?9001h\33[?1004h", 4096)   = 16
+write(1, "\33[?9001h\33[?1004h", 16)    = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\33[m\33]0;D:\\MAI-year2\\os\\os_lab3\\b"..., 4096) = 54
+write(1, "\33[m\33]0;D:\\MAI-year2\\os\\os_lab3\\b"..., 54) = 54
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "Enter file name: ", 4096)      = 17
+write(1, "Enter file name: ", 17)       = 17
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[83;31;115;1;32;1_", 4096)  = 19
+write(6, "\33[83;31;115;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "s", 4096)                      = 1
+write(1, "s", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[83;31;115;0;32;1_", 4096)  = 19
+write(6, "\33[83;31;115;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[84;20;116;1;32;1_", 4096)  = 19
+write(6, "\33[84;20;116;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "t", 4096)                      = 1
+write(1, "t", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[84;20;116;0;32;1_", 4096)  = 19
+write(6, "\33[84;20;116;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;0;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;0;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;0;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;0;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[84;20;116;1;32;1_", 4096)  = 19
+write(6, "\33[84;20;116;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "t", 4096)                      = 1
+write(1, "t", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[84;20;116;0;32;1_", 4096)  = 19
+write(6, "\33[84;20;116;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[82;19;114;1;32;1_", 4096)  = 19
+write(6, "\33[82;19;114;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "r", 4096)                      = 1
+write(1, "r", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[82;19;114;0;32;1_", 4096)  = 19
+write(6, "\33[82;19;114;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[65;16;97;1;32;1_", 4096)   = 18
+write(6, "\33[65;16;97;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "a", 4096)                      = 1
+write(1, "a", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[67;46;99;1;32;1_", 4096)   = 18
+write(6, "\33[67;46;99;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 2 ([{fd=0, revents=POLLIN}, {fd=7, revents=POLLIN}])
+read(0, "\33[65;16;97;0;32;1_", 4096)   = 18
+write(6, "\33[65;16;97;0;32;1_", 18)    = 18
+read(7, "c", 4096)                      = 1
+write(1, "c", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[67;46;99;0;32;1_", 4096)   = 18
+write(6, "\33[67;46;99;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[69;18;101;1;32;1_", 4096)  = 19
+write(6, "\33[69;18;101;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "e", 4096)                      = 1
+write(1, "e", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[69;18;101;0;32;1_", 4096)  = 19
+write(6, "\33[69;18;101;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[16;54;0;1;48;1_", 4096)    = 17
+write(6, "\33[16;54;0;1;48;1_", 17)     = 17
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[190;51;46;1;48;1_", 4096)  = 19
+write(6, "\33[190;51;46;1;48;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, ".", 4096)                      = 1
+write(1, ".", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[16;54;0;0;32;1_", 4096)    = 17
+write(6, "\33[16;54;0;0;32;1_", 17)     = 17
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[190;51;59;0;32;1_", 4096)  = 19
+write(6, "\33[190;51;59;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[84;20;116;1;32;1_", 4096)  = 19
+write(6, "\33[84;20;116;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "t", 4096)                      = 1
+write(1, "t", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[84;20;116;0;32;1_", 4096)  = 19
+write(6, "\33[84;20;116;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[88;45;120;1;32;1_", 4096)  = 19
+write(6, "\33[88;45;120;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "x", 4096)                      = 1
+write(1, "x", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[84;20;116;1;32;1_", 4096)  = 19
+write(6, "\33[84;20;116;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "t", 4096)                      = 1
+write(1, "t", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[88;45;120;0;32;1_", 4096)  = 19
+write(6, "\33[88;45;120;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[84;20;116;0;32;1_", 4096)  = 19
+write(6, "\33[84;20;116;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;0;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;0;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[84;20;116;1;32;1_", 4096)  = 19
+write(6, "\33[84;20;116;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "t", 4096)                      = 1
+write(1, "t", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[84;20;116;0;32;1_", 4096)  = 19
+write(6, "\33[84;20;116;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[69;18;101;1;32;1_", 4096)  = 19
+write(6, "\33[69;18;101;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "e", 4096)                      = 1
+write(1, "e", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[69;18;101;0;32;1_", 4096)  = 19
+write(6, "\33[69;18;101;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[83;31;115;1;32;1_", 4096)  = 19
+write(6, "\33[83;31;115;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "s", 4096)                      = 1
+write(1, "s", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[84;20;116;1;32;1_", 4096)  = 19
+write(6, "\33[84;20;116;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 2 ([{fd=0, revents=POLLIN}, {fd=7, revents=POLLIN}])
+read(0, "\33[83;31;115;0;32;1_", 4096)  = 19
+write(6, "\33[83;31;115;0;32;1_", 19)   = 19
+read(7, "t", 4096)                      = 1
+write(1, "t", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[84;20;116;0;32;1_", 4096)  = 19
+write(6, "\33[84;20;116;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[97;79;49;1;32;1_", 4096)   = 18
+write(6, "\33[97;79;49;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "1", 4096)                      = 1
+write(1, "1", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[97;79;49;0;32;1_", 4096)   = 18
+write(6, "\33[97;79;49;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[13;28;13;1;32;1_", 4096)   = 18
+write(6, "\33[13;28;13;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\r", 4096)                     = 1
+write(1, "\r", 1)                       = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\n", 4096)                     = 1
+write(1, "\n", 1)                       = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "Child process created. Using FIL"..., 4096) = 51
+write(1, "Child process created. Using FIL"..., 51) = 51
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\n", 4096)                     = 1
+write(1, "\n", 1)                       = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "Enter numbers separated by space"..., 4096) = 57
+write(1, "Enter numbers separated by space"..., 57) = 57
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\nFor exit write 'exit' or empty "..., 4096) = 37
+write(1, "\nFor exit write 'exit' or empty "..., 37) = 37
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\n>\33[1C", 4096)              = 6
+write(1, "\n>\33[1C", 6)                = 6
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[13;28;13;0;32;1_", 4096)   = 18
+write(6, "\33[13;28;13;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[100;75;52;1;32;1_", 4096)  = 19
+write(6, "\33[100;75;52;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "4", 4096)                      = 1
+write(1, "4", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[100;75;52;0;32;1_", 4096)  = 19
+write(6, "\33[100;75;52;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;1;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "0", 4096)                      = 1
+write(1, "0", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;0;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;1;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "0", 4096)                      = 1
+write(1, "0", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;0;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[32;57;32;1;32;1_", 4096)   = 18
+write(6, "\33[32;57;32;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, " ", 4096)                      = 1
+write(1, " ", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[101;76;53;1;32;1_", 4096)  = 19
+write(6, "\33[101;76;53;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "5", 4096)                      = 1
+write(1, "5", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[32;57;32;0;32;1_", 4096)   = 18
+write(6, "\33[32;57;32;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[101;76;53;0;32;1_", 4096)  = 19
+write(6, "\33[101;76;53;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;1;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "0", 4096)                      = 1
+write(1, "0", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;0;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;0;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;0;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;0;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;0;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[105;73;57;1;32;1_", 4096)  = 19
+write(6, "\33[105;73;57;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "9", 4096)                      = 1
+write(1, "9", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[105;73;57;0;32;1_", 4096)  = 19
+write(6, "\33[105;73;57;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;0;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;0;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[102;77;54;1;32;1_", 4096)  = 19
+write(6, "\33[102;77;54;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "6", 4096)                      = 1
+write(1, "6", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[102;77;54;0;32;1_", 4096)  = 19
+write(6, "\33[102;77;54;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;1;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "0", 4096)                      = 1
+write(1, "0", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;0;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[32;57;32;1;32;1_", 4096)   = 18
+write(6, "\33[32;57;32;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, " ", 4096)                      = 1
+write(1, " ", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[32;57;32;0;32;1_", 4096)   = 18
+write(6, "\33[32;57;32;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[105;73;57;1;32;1_", 4096)  = 19
+write(6, "\33[105;73;57;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "9", 4096)                      = 1
+write(1, "9", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[105;73;57;0;32;1_", 4096)  = 19
+write(6, "\33[105;73;57;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[13;28;13;1;32;1_", 4096)   = 18
+write(6, "\33[13;28;13;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\r", 4096)                     = 1
+write(1, "\r", 1)                       = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\n", 4096)                     = 1
+write(1, "\n", 1)                       = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "Waiting for child to process...\r", 4096) = 32
+write(1, "Waiting for child to process...\r", 32) = 32
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\n", 4096)                     = 1
+write(1, "\n", 1)                       = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "Processing complete. Results wri"..., 4096) = 46
+write(1, "Processing complete. Results wri"..., 46) = 46
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\n", 4096)                     = 1
+write(1, "\n", 1)                       = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "> ", 4096)                     = 2
+write(1, "> ", 2)                       = 2
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[13;28;13;0;32;1_", 4096)   = 18
+write(6, "\33[13;28;13;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[101;76;53;1;32;1_", 4096)  = 19
+write(6, "\33[101;76;53;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "5", 4096)                      = 1
+write(1, "5", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[101;76;53;0;32;1_", 4096)  = 19
+write(6, "\33[101;76;53;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;1;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "0", 4096)                      = 1
+write(1, "0", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;0;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;1;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "0", 4096)                      = 1
+write(1, "0", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;0;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[32;57;32;1;32;1_", 4096)   = 18
+write(6, "\33[32;57;32;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, " ", 4096)                      = 1
+write(1, " ", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[32;57;32;0;32;1_", 4096)   = 18
+write(6, "\33[32;57;32;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[O", 4096)                  = 3
+write(6, "\33[O", 3)                    = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[I", 4096)                  = 3
+write(6, "\33[I", 3)                    = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[103;71;55;1;32;1_", 4096)  = 19
+write(6, "\33[103;71;55;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "7", 4096)                      = 1
+write(1, "7", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[103;71;55;0;32;1_", 4096)  = 19
+write(6, "\33[103;71;55;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[32;57;32;1;32;1_", 4096)   = 18
+write(6, "\33[32;57;32;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, " ", 4096)                      = 1
+write(1, " ", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[32;57;32;0;32;1_", 4096)   = 18
+write(6, "\33[32;57;32;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;1;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "0", 4096)                      = 1
+write(1, "0", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[96;82;48;0;32;1_", 4096)   = 18
+write(6, "\33[96;82;48;0;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[220;43;42;1;32;1_", 4096)  = 19
+write(6, "\33[220;43;42;1;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "*", 4096)                      = 1
+write(1, "*", 1)                        = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[220;43;42;0;32;1_", 4096)  = 19
+write(6, "\33[220;43;42;0;32;1_", 19)   = 19
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;1;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;1;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\10 \10", 4096)                = 3
+write(1, "\10 \10", 3)                  = 3
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[8;14;8;0;32;1_", 4096)     = 16
+write(6, "\33[8;14;8;0;32;1_", 16)      = 16
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=0, revents=POLLIN}])
+read(0, "\33[13;28;13;1;32;1_", 4096)   = 18
+write(6, "\33[13;28;13;1;32;1_", 18)    = 18
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\r", 4096)                     = 1
+write(1, "\r", 1)                       = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\n", 4096)                     = 1
+write(1, "\n", 1)                       = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "Waiting for child to process...\r", 4096) = 32
+write(1, "Waiting for child to process...\r", 32) = 32
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\n", 4096)                     = 1
+write(1, "\n", 1)                       = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "EMERGENCY: Division by zero dete"..., 4096) = 55
+write(1, "EMERGENCY: Division by zero dete"..., 55) = 55
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\n", 4096)                     = 1
+write(1, "\n", 1)                       = 1
+poll([{fd=0, events=POLLIN}, {fd=7, events=POLLIN}, {fd=8, events=POLLIN}, {fd=9, events=POLLIN}, {fd=4, events=POLLIN}], 5, -1) = 3 ([{fd=7, revents=POLLIN}, {fd=8, revents=POLLIN}, {fd=9, revents=POLLIN}])
+read(7, "Shutting down...\r", 4096)     = 17
+write(1, "Shutting down...\r", 17)      = 17
+read(8, "", 4096)                       = 0
+recvfrom(9, "\t\0\0\0\20\0\0\0\260\366\237\252", 12, MSG_WAITALL, NULL, NULL) = 12
+recvfrom(9, "\0\0\0\0", 4, 0, NULL, NULL) = 4
+shutdown(6, SHUT_WR)                    = 0
+poll([{fd=-1}, {fd=7, events=POLLIN}, {fd=-1}, {fd=-1}, {fd=-1}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\nParent process finished. Child "..., 4096) = 45
+write(1, "\nParent process finished. Child "..., 45) = 45
+shutdown(6, SHUT_WR)                    = 0
+poll([{fd=-1}, {fd=7, events=POLLIN}, {fd=-1}, {fd=-1}, {fd=-1}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "\33[?9001l\33[?1004l\n", 4096) = 17
+write(1, "\33[?9001l\33[?1004l\n", 17)  = 17
+shutdown(6, SHUT_WR)                    = 0
+poll([{fd=-1}, {fd=7, events=POLLIN}, {fd=-1}, {fd=-1}, {fd=-1}], 5, -1) = 1 ([{fd=7, revents=POLLIN}])
+read(7, "", 4096)                       = 0
+shutdown(6, SHUT_WR)                    = 0
+close(4)                                = 0
+close(5)                                = 0
+close(9)                                = 0
+close(8)                                = 0
+close(7)                                = 0
+close(6)                                = 0
+munmap(0x783f73036000, 16384)           = 0
+ioctl(3, TCSETS, {c_iflag=ICRNL|IXON, c_oflag=NL0|CR0|TAB0|BS0|VT0|FF0|OPOST|ONLCR, c_cflag=B38400|CS8|CREAD, c_lflag=ISIG|ICANON|ECHO|ECHOE|ECHOK|IEXTEN|ECHOCTL|ECHOKE, ...}) = 0
+close(3)                                = 0
+munmap(0x783f7303a000, 8192)            = 0
+munmap(0x783f7303c000, 4096)            = 0
+munmap(0x783f7303d000, 4096)            = 0
+munmap(0x783f7303e000, 4096)            = 0
+munmap(0x783f7303f000, 4096)            = 0
+munmap(0x783f73040000, 4096)            = 0
+munmap(0x783f73041000, 4096)            = 0
+munmap(0x783f73042000, 4096)            = 0
+munmap(0x783f73043000, 4096)            = 0
+exit_group(0)                           = ?
++++ exited with 0 +++
+\end{verbatim}

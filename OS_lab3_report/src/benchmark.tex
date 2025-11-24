@@ -1,0 +1,50 @@
+\section{Результаты}
+
+В результате работы была разработана программа для межпроцессного взаимодействия с использованием технологии File Mapping, успешно функционирующая в операционной системе Windows и Unix-системах.
+
+\subsection{Ключевые особенности реализации}
+
+\begin{itemize}
+    \item \textbf{Межпроцессное взаимодействие через File Mapping:} Использование разделяемой памяти для обмена данными между родительским и дочерним процессами
+    \item \textbf{Синхронизация процессов:} Координация работы процессов через флаги в разделяемой памяти (data\_ready, processing\_complete)
+    \item \textbf{Надежная обработка данных:} Парсинг числовых входных данных с валидацией и контролем ошибок
+    \item \textbf{Арифметическая безопасность:} Обнаружение и обработка деления на ноль с аварийным завершением обоих процессов
+    \item \textbf{Корректное управление ресурсами:} Правильное закрытие процессов, файлов и дескрипторов разделяемой памяти при завершении
+\end{itemize}
+
+\subsection{Пример работы программы}
+
+\begin{verbatim}
+PS D:\MAI-year2\os\os_lab3\build> ./parent.exe
+Enter file name: test1
+Child process created. Using FILE MAPPING for IPC.
+Enter numbers separated by spaces (cumulative division):
+For exit write 'exit' or empty line
+> 400 60 9
+Waiting for child to process...
+Processing complete. Results written to file.
+> 500 7 0
+Waiting for child to process...
+EMERGENCY: Division by zero detected! Shutting down...
+Shutting down...
+Parent process finished. Child exit code: 2
+\end{verbatim}
+
+\noindent\textbf{Содержимое файла test1:}
+\begin{verbatim}
+Child process started. Output file: test1
+Using FILE MAPPING for IPC with parent
+Input: 400 60 9 
+Division results:
+  400.00 / 60.00 = 6.67
+  6.67 / 9.00 = 0.74
+Final result: 0.74
+---
+Input: 500 7 0 
+ERROR: Division by zero! 500 / 0
+EMERGENCY SHUTDOWN: Division by zero detected
+\end{verbatim}
+
+\subsection{Производительность}
+
+Программа демонстрирует стабильную работу при обработке числовых данных различного объема. Использование технологии File Mapping обеспечивает высокоскоростной обмен данными между процессами. Время отклика системы на ввод пользователя практически не отличается от времени работы обычных консольных приложений, что подтверждает эффективность выбранного подхода к организации межпроцессного взаимодействия.
