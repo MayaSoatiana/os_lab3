@@ -10,6 +10,65 @@ void TrimNewline(char* str) {
 #ifdef _WIN32
 #include <windows.h>
 
+void* CpCreateSharedMemory(const char* name, size_t size) {
+    HANDLE hMapFile = CreateFileMapping(
+        INVALID_HANDLE_VALUE,    
+        NULL,                    
+        PAGE_READWRITE,          
+        0,                     
+        (DWORD)size,           
+        name);                   
+
+    if (hMapFile == NULL) {
+        fprintf(stderr, "Error creating shared memory (%lu)\n", GetLastError());
+        return NULL;
+    }
+
+    void* ptr = MapViewOfFile(
+        hMapFile,               
+        FILE_MAP_ALL_ACCESS,    
+        0, 0, size);
+
+    if (ptr == NULL) {
+        fprintf(stderr, "Error mapping shared memory (%lu)\n", GetLastError());
+        CloseHandle(hMapFile);
+        return NULL;
+    }
+
+    return ptr;
+}
+
+void* CpOpenSharedMemory(const char* name, size_t size) {
+    HANDLE hMapFile = OpenFileMapping(
+        FILE_MAP_ALL_ACCESS,    
+        FALSE,                
+        name);                  
+
+    if (hMapFile == NULL) {
+        fprintf(stderr, "Error opening shared memory (%lu)\n", GetLastError());
+        return NULL;
+    }
+
+    void* ptr = MapViewOfFile(
+        hMapFile,               
+        FILE_MAP_ALL_ACCESS,    
+        0, 0, size);
+
+    if (ptr == NULL) {
+        fprintf(stderr, "Error mapping shared memory (%lu)\n", GetLastError());
+        CloseHandle(hMapFile);
+        return NULL;
+    }
+
+    return ptr;
+}
+
+void CpCloseSharedMemory(const char* name, void* ptr, size_t size) {
+    if (ptr != NULL) {
+        UnmapViewOfFile(ptr);
+    }
+}
+
 int CpProcessCreate(process_t* proc, const char* path) {
     if (!proc || !path) return -1;
 
@@ -113,6 +172,10 @@ int CpProcessClose(process_t* proc) {
 #include <sys/wait.h>
 #include <errno.h>
 
+void* CpCreateSharedMemory(const char* name, size_t size) { return NULL; }
+void* CpOpenSharedMemory(const char* name, size_t size) { return NULL; }
+void CpCloseSharedMemory(const char* name, void* ptr, size_t size) {}
+
 int CpProcessCreate(process_t* proc, const char* path) {
     if (!proc || !path) return -1;
     int inpipe[2];
@@ -188,3 +251,12 @@ int CpProcessClose(process_t* proc) {
 }
 
 #endif
+
+size_t CpStringLength(const char* str) {
+    return str ? strlen(str) : 0;
+}
+
+int CpStringContains(const char* str, const char* substr) {
+    if (!str || !substr) return 0;
+    return strstr(str, substr) != NULL;
+}

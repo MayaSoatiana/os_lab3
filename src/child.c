@@ -1,133 +1,113 @@
+#include "library.h"
+#include "shared_data.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
 #include <ctype.h>
-#include "library.h"
 
 #ifdef _WIN32
 #include <windows.h>
 #endif
 
-#define BUFFER_SIZE 2048
+#define BUFFER_SIZE 1024
 
 int main(int argc, char* argv[]) {
-    char buffer[BUFFER_SIZE];
-    FILE* file = NULL;
+    FILE* output_file = NULL;
+
+    const char* shm_name = "Local\\DivisionLab3";
+    SharedData* shared_data = (SharedData*)CpOpenSharedMemory(shm_name, sizeof(SharedData));
+    
+    if (shared_data == NULL) {
+        fprintf(stderr, "Error: Failed to open shared memory\n");
+        return EXIT_FAILURE;
+    }
 
     if (argc != 2) {
-        const char* err = "Error: expected filename as command line argument\n";
-        printf("%s", err); 
-        fflush(stdout);
+        fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
+        CpCloseSharedMemory(shm_name, shared_data, sizeof(SharedData));
         return EXIT_FAILURE;
     }
 
     const char* filename = argv[1];
-    file = fopen(filename, "w");
-    if (file == NULL) {
-        char err[BUFFER_SIZE];
-        snprintf(err, sizeof(err), "Error: cannot open file '%s' for writing: %s\n", 
-                filename, strerror(errno));
-        printf("%s", err); 
-        fflush(stdout);
+
+    output_file = fopen(filename, "w");
+    if (output_file == NULL) {
+        fprintf(stderr, "Error: Cannot open file '%s'\n", filename);
+        CpCloseSharedMemory(shm_name, shared_data, sizeof(SharedData));
         return EXIT_FAILURE;
     }
 
-    fprintf(file, "Child process started. Output file: %s\n", filename);
-    fflush(file);
-    
-    printf("File opened successfully: %s\n", filename); 
-    fflush(stdout);
+    fprintf(output_file, "Child process started. Output file: %s\n", filename);
+    fprintf(output_file, "Using FILE MAPPING for IPC with parent\n");
+    fflush(output_file);
 
-    while (fgets(buffer, sizeof(buffer), stdin)) {
-        TrimNewline(buffer);
+    printf("Child process started. Monitoring shared memory...\n");
 
-        if (strlen(buffer) == 0) {
-            break;
-        }
+    while (!shared_data->terminate_process) {
+        if (shared_data->data_ready) {
+            if (shared_data->numbers_count < 2) {
+                fprintf(output_file, "Error: need at least 2 numbers, got %d\n", shared_data->numbers_count);
+            } else {
+                fprintf(output_file, "Input: ");
+                for (int i = 0; i < shared_data->numbers_count; i++) {
+                    fprintf(output_file, "%d ", shared_data->numbers[i]);
+                }
+                fprintf(output_file, "\n");
 
-        int values_count = 0;
-        int values[256]; 
-        char *tok = strtok(buffer, " \t");
-        int parse_error = 0;
-        
-        while (tok != NULL && values_count < (int)(sizeof(values)/sizeof(values[0]))) {
-            int valid = 1;
-            for (int i = 0; tok[i] != '\0'; i++) {
-                if (!isdigit(tok[i]) && !(i == 0 && tok[i] == '-')) {
-                    valid = 0;
-                    break;
+                int division_by_zero = 0;
+                for (int i = 1; i < shared_data->numbers_count; i++) {
+                    if (shared_data->numbers[i] == 0) {
+                        fprintf(output_file, "ERROR: Division by zero! %d / %d\n", 
+                                shared_data->numbers[0], shared_data->numbers[i]);
+                        division_by_zero = 1;
+                        shared_data->division_by_zero = 1;
+                        break;
+                    }
+                }
+
+                if (!division_by_zero) {
+                    float result = (float)shared_data->numbers[0];
+                    fprintf(output_file, "Division results:\n");
+                    for (int i = 1; i < shared_data->numbers_count; i++) {
+                        float temp = result / (float)shared_data->numbers[i];
+                        fprintf(output_file, "  %.2f / %.2f = %.2f\n", 
+                                result, (float)shared_data->numbers[i], temp);
+                        result = temp;
+                    }
+                    fprintf(output_file, "Final result: %.2f\n", result);
+                    fprintf(output_file, "---\n");
                 }
             }
             
-            if (valid) {
-                values[values_count++] = atoi(tok);
-            } else {
-                parse_error = 1;
-                break;
-            }
-            tok = strtok(NULL, " \t");
-        }
+            fflush(output_file);
+            shared_data->processing_complete = 1;
+            shared_data->data_ready = 0;
 
-        if (values_count == 0) {
-            fprintf(file, "Error: no valid numbers found in input\n");
-            fflush(file);
-            continue;
-        }
-
-        if (parse_error) {
-            fprintf(file, "Error: failed to parse integers correctly\n");
-            fflush(file);
-            continue;
-        }
-
-        if (values_count < 2) {
-            fprintf(file, "Error: minimum 2 numbers required, got %d\n", values_count);
-            fflush(file);
-            continue;
-        }
-
-        fprintf(file, "Input: ");
-        for (int i = 0; i < values_count; i++) {
-            fprintf(file, "%d ", values[i]);
-        }
-        fprintf(file, "\n");
-
-        int divzero = 0;
-        for (int i = 1; i < values_count; ++i) {
-            if (values[i] == 0) {
-                fprintf(file, "ERROR: Division by zero! %d / %d\n", values[0], values[i]);
-                divzero = 1;
-                break;
+            if (shared_data->division_by_zero) {
+                fprintf(output_file, "EMERGENCY SHUTDOWN: Division by zero detected\n");
+                fflush(output_file);
+                fclose(output_file);
+                CpCloseSharedMemory(shm_name, shared_data, sizeof(SharedData));
+                
+                #ifdef _WIN32
+                    ExitProcess(2);
+                #else
+                    exit(2);
+                #endif
             }
         }
-
-        if (divzero) {
-            fprintf(file, "EMERGENCY SHUTDOWN: Division by zero detected\n");
-            fflush(file);
-            fclose(file);
-            #ifdef _WIN32
-                ExitProcess(2);  
-            #else
-                exit(2);
-            #endif
-        }
-
-        float result = (float)values[0];
-        fprintf(file, "Division results:\n");
-        for (int i = 1; i < values_count; i++) {
-            float temp = result / (float)values[i];
-            fprintf(file, "  %.2f / %.2f = %.2f\n", result, (float)values[i], temp);
-            result = temp;
-        }
-
-        fprintf(file, "---\n");
-        fflush(file);
+        
+        #ifdef _WIN32
+            Sleep(10);
+        #else
+            usleep(10000);
+        #endif
     }
 
-    fprintf(file, "Child process finished normally\n");
-    if (file) fclose(file);
+    fprintf(output_file, "Child process finished normally\n");
+    fclose(output_file);
+    CpCloseSharedMemory(shm_name, shared_data, sizeof(SharedData));
+    
     printf("Child process finished\n");
-    fflush(stdout);
     return EXIT_SUCCESS;
 }

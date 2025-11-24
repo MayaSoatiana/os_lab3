@@ -35,6 +35,10 @@ int  CpProcessClose(process_t* proc);
 size_t CpStringLength(const char* str);
 int    CpStringContains(const char* str, const char* substr);
 
+void* CpCreateSharedMemory(const char* name, size_t size);
+void* CpOpenSharedMemory(const char* name, size_t size);
+void  CpCloseSharedMemory(const char* name, void* ptr, size_t size);
+
 static inline const char* CpGetChildProcessName(const char* baseName) {
     (void)baseName;
 #ifdef _WIN32
